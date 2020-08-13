@@ -2,15 +2,23 @@ import * as React from 'react';
 import Body from './layout/Body';
 import Header from './layout/Header';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { initialState, reducer } from './reducer';
+import { AppContext } from './AppContext';
 
-export interface IApp {}
+const App: React.FC = () => {
+  const [store, dispatch] = React.useReducer(reducer, initialState);
 
-const App: React.FC<IApp> = () => {
+  React.useEffect(() => {
+    console.log('store', store);
+  }, [store]);
+
   return (
-    <Router>
-      <Header />
-      <Body />
-    </Router>
+    <AppContext.Provider value={{ store, dispatch }}>
+      <Router>
+        <Header />
+        <Body />
+      </Router>
+    </AppContext.Provider>
   );
 };
 

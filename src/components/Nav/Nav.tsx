@@ -32,7 +32,7 @@ const Nav = () => {
           <Typography variant='h6' className={classes.title}>
             Testing task
           </Typography>
-          <Button color='inherit' exact='/' component={NavLink} to='/'>
+          <Button color='inherit' exact component={NavLink} to='/'>
             <SvgIcon className={classes.icon}>
               <path d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' />
             </SvgIcon>

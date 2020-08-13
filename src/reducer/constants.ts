@@ -1,0 +1,5 @@
+export const ADD_EMPLOYEE = 'ADD_EMPLOYEE';
+export const REMOVE_EMPLOYEE = 'REMOVE_EMPLOYEE';
+export const CHANGE_EMPLOYEE = 'CHANGE_EMPLOYEE';
+
+export const ADD_HISTORY = 'ADD_HISTORY';
