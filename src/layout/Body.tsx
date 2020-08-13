@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+import { Switch, Route } from 'react-router-dom';
 import PageHome from '../page/PageHome/PageHome';
 import Page404 from '../page/Page404/Page404';
 import PageHistory from '../page/PageHistory/PageHistory';
 
-export interface IBody {}
-
-const Body: React.FC<IBody> = () => {
+const Body: React.FC = () => {
   return (
     <main className='container-fluid'>
       <Switch>

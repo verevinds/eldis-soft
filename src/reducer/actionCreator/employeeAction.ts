@@ -1,4 +1,4 @@
-import { Employee } from '..';
+import { Employee } from '../interfaceReducer';
 import { ADD_EMPLOYEE, REMOVE_EMPLOYEE, CHANGE_EMPLOYEE } from '../constants';
 
 export const employeeAddNew = <T extends Employee>(

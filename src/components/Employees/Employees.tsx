@@ -3,11 +3,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { AppContext, TDefaultValue } from '../../AppContext';
 import EmployeesAdd from '../EmployeesAdd/EmployeesAdd';
 import EmployeesCard from '../EmployeesCard/EmployeesCard';
-import { Employee } from '../../reducer';
+import { Employee } from '../../reducer/interfaceReducer';
 
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import Dialog from '@material-ui/core/Dialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,9 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Employees: React.FC = () => {
-  const [show, setShow] = React.useState(false);
-  const { store } = React.useContext(AppContext);
   const classes = useStyles();
+  const { store } = React.useContext(AppContext);
+  const [show, setShow] = React.useState(false);
   const handleToggle = React.useCallback(() => {
     setShow(!show);
   }, [show]);
@@ -36,7 +35,7 @@ const Employees: React.FC = () => {
   return (
     <>
       {store?.employees.map((item: Employee, index: number) => (
-        <EmployeesCard employee={item} index={index} />
+        <EmployeesCard employee={item} index={index} key={item.id || String(item.employmentDate)} />
       ))}
       <div className={classes.root}>
         <Fab aria-label={'Add'} className={classes.fab} color={'primary'}>

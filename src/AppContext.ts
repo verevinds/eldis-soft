@@ -1,4 +1,4 @@
-import { IInitialState, TAction } from './reducer/index';
+import { IInitialState, TAction } from './reducer/interfaceReducer';
 import React, { createContext } from 'react';
 
 export type TDefaultValue = {

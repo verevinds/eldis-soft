@@ -6,7 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Employee } from '../../reducer';
+import { Department, Employee } from '../../reducer/interfaceReducer';
 import { AppContext } from '../../AppContext';
 import { employeeRemove } from '../../reducer/actionCreator/employeeAction';
 import EmployeesAdd from '../EmployeesAdd/EmployeesAdd';
@@ -29,6 +29,7 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
 });
+
 export interface IEmployeesCard {
   employee: Employee;
   index: number;
@@ -38,6 +39,14 @@ const EmployeesCard: React.FC<IEmployeesCard> = ({ employee, index }) => {
   const classes = useStyles();
   const [change, setChange] = React.useState(false);
   const { store, dispatch } = React.useContext(AppContext);
+
+  const departmentName = React.useMemo(() => {
+    const name = store?.departments.find(
+      (department: Department) => department.id === employee.department,
+    )?.name;
+
+    return name;
+  }, [store, employee]);
 
   return (
     <>
@@ -53,7 +62,7 @@ const EmployeesCard: React.FC<IEmployeesCard> = ({ employee, index }) => {
             {`${employee.firstName}`}
           </Typography>
           <Typography variant='body2' component='p'>
-            {`Отдел: ${employee.department}`}
+            {`Отдел: ${departmentName}`}
           </Typography>
           <Typography variant='body2' component='p'>
             {`Должность: ${employee.position}`}

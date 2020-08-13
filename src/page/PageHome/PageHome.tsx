@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+
 import Employees from '../../components/Employees/Employees';
 
-export interface IPageHome {}
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 
-const PageHome: React.FC<IPageHome> = () => {
+const PageHome: React.FC = () => {
   return (
     <Container maxWidth='xl'>
       <Typography variant='h1'>Home</Typography>

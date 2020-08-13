@@ -1,8 +1,11 @@
 import * as React from 'react';
 
-import { Employee } from '../../reducer';
+import { Department, Employee } from '../../reducer/interfaceReducer';
+
 import { AppContext } from '../../AppContext';
+
 import { employeeAddNew, employeeChange } from '../../reducer/actionCreator/employeeAction';
+import { historyAdd } from '../../reducer/actionCreator/historyAction';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -12,7 +15,11 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { historyAdd } from '../../reducer/actionCreator/historyAction';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 export interface IEmployeesAdd {
   handleToggle: () => void;
@@ -32,6 +39,9 @@ const useStyles = makeStyles({
   root: {
     minWidth: '100%',
   },
+  option: {
+    cursor: 'pointer',
+  },
   content: {
     display: 'flex',
     flexDirection: 'column',
@@ -41,7 +51,7 @@ const useStyles = makeStyles({
 
 const EmployeesAdd: React.FC<IEmployeesAdd> = ({ handleToggle, show, title, employeeFor }) => {
   const classes = useStyles();
-  const { dispatch } = React.useContext(AppContext);
+  const { store, dispatch } = React.useContext(AppContext);
   const [state, setState] = React.useState<Partial<Employee>>({});
   const [validate, setValidate] = React.useState<IValidate<Employee>>({
     department: true,
@@ -52,6 +62,7 @@ const EmployeesAdd: React.FC<IEmployeesAdd> = ({ handleToggle, show, title, empl
     id: true,
     mentorId: true,
   });
+
   React.useEffect(() => {
     if (employeeFor) setState(employeeFor.employee);
     else
@@ -161,15 +172,38 @@ const EmployeesAdd: React.FC<IEmployeesAdd> = ({ handleToggle, show, title, empl
               value={state.firstName || ''}
               onChange={handleState('firstName').stringValue}
             />
-            <TextField
-              error={!validate.department}
-              id='department'
-              label='Отдел'
-              type='number'
-              required
-              value={String(state.department) || ''}
-              onChange={handleState('department').stringValue}
-            />
+            <FormControl error={!validate.department}>
+              <InputLabel id='department'>Отдел</InputLabel>
+              <Select
+                labelId='department'
+                id='department'
+                value={String(state.department) || ''}
+                inputProps={{
+                  name: 'department',
+                  id: 'age-native-simple',
+                }}
+                onChange={(
+                  event: React.ChangeEvent<{
+                    name?: string | undefined;
+                    value: unknown;
+                  }>,
+                ) => {
+                  const name = event.target.name as keyof typeof state;
+                  setState({
+                    ...state,
+                    [name]: event.target.value,
+                  });
+                }}>
+                <option aria-label='None' value='' className={classes.option} selected />
+
+                {store?.departments.map((department: Department) => (
+                  <option value={department.id} className={classes.option} key={department.id}>
+                    {department.name}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+
             <TextField
               error={!validate.position}
               id='position'

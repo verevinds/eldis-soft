@@ -1,4 +1,4 @@
-import { IHistory } from './../index';
+import { IHistory } from '../interfaceReducer';
 import { ADD_HISTORY } from '../constants';
 
 export const historyAdd = <T extends IHistory>(

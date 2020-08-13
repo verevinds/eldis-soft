@@ -1,9 +1,7 @@
-import Nav from '../components/Nav/Nav';
 import * as React from 'react';
+import Nav from '../components/Nav/Nav';
 
-export interface IHeader {}
-
-const Header: React.FC<IHeader> = () => {
+const Header: React.FC = () => {
   return (
     <header className='bg-info bg-gradient'>
       <Nav />

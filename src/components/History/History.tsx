@@ -3,7 +3,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { AppContext } from '../../AppContext';
-import { IHistory } from '../../reducer';
+import { IHistory } from '../../reducer/interfaceReducer';
 
 const History: React.FC = () => {
   const { store } = React.useContext(AppContext);

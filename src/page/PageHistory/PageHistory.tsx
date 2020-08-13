@@ -3,9 +3,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import History from '../../components/History/History';
 
-export interface IPageHistory {}
-
-const PageHistory: React.FC<IPageHistory> = () => {
+const PageHistory: React.FC = () => {
   return (
     <Container maxWidth='xl'>
       <Typography variant='h1'>History</Typography>
